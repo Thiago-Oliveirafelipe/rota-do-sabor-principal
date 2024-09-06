@@ -1,68 +1,105 @@
 import React from 'react';
-import { Text, StyleSheet, SafeAreaView, View, TextInput, TouchableOpacity, Image } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image } from 'react-native';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
-const Register = () => {
+const LoginScreen = () => {
   return (
-    <SafeAreaView style={styles.container}>
-      <View style={styles.logoContainer}>
-        <Image source={logoImage} style={styles.logo} />
+    <View style={styles.container}>
+      {/* Logo e Título */}
+      <View style={styles.header}>
+        <Image source={require('./imagens/logo.png')} style={styles.logo} />
+        <Text style={styles.title}>ROTA DO SABOR</Text>
+        <Text style={styles.subTitle}>Redefinir Senha</Text>
       </View>
-      <View style={styles.form}>
-        <TextInput
-          style={styles.input}
-          placeholder="Email"
-          keyboardType="email-address"
-        />
-        <TextInput
-          style={styles.input}
-          placeholder="Nova senha"
-          secureTextEntry
-        />
-        <TouchableOpacity style={styles.button}>
-          <Text style={styles.buttonText}>Entrar</Text> 
-        </TouchableOpacity>
+
+      {/* Campos de Email e Senha */}
+      <View style={styles.inputContainer}>
+        <View style={styles.inputWrapper}>
+          <Icon name="email" size={20} color="#000" />
+          <TextInput style={styles.input} placeholder="Email" />
+        </View>
+        <View style={styles.inputWrapper}>
+          <Icon name="lock" size={20} color="#000" />
+          <TextInput style={styles.input} placeholder="Senha" secureTextEntry />
+        </View>
       </View>
-    </SafeAreaView>
+
+      {/* Botão de Entrar */}
+      <TouchableOpacity style={styles.loginButton}>
+        <Text style={styles.loginButtonText}>Entrar</Text>
+      </TouchableOpacity>
+
+      {/* Área Laranja na Parte Inferior */}
+      <View style={styles.bottomCurve}></View>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: '#FFF',
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#FAFAFA',
+    padding: 20,
   },
-  logoContainer: {
-    marginBottom: 20, 
+  header: {
+    alignItems: 'center',
+    marginBottom: 40,
   },
   logo: {
-    width: 200,  
-    height: 200,
-    resizeMode: 'contain', 
+    width: 60,
+    height: 60,
   },
-  form: {
-    width: '80%',
+  title: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    color: '#000',
+    marginTop: 10,
+  },
+  subTitle: {
+    fontSize: 14,
+    color: '#A0A0A0',
+    marginTop: 5,
+  },
+  inputContainer: {
+    width: '100%',
+    marginBottom: 30,
+  },
+  inputWrapper: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    borderBottomWidth: 1,
+    borderBottomColor: '#000',
+    marginBottom: 20,
+    paddingBottom: 5,
   },
   input: {
-    height: 50,
-    borderColor: '#DDD',
-    borderWidth: 1,
-    borderRadius: 5,
-    marginBottom: 15,
-    paddingHorizontal: 10,
+    flex: 1,
+    marginLeft: 10,
+    fontSize: 16,
   },
-  button: {
-    backgroundColor: '#FA662A', 
+  loginButton: {
+    backgroundColor: '#FF7733',
+    borderRadius: 10,
     paddingVertical: 15,
-    borderRadius: 5,
+    width: '100%',
     alignItems: 'center',
   },
-  buttonText: {
+  loginButtonText: {
     color: '#FFF',
-    fontSize: 18,
+    fontSize: 16,
     fontWeight: 'bold',
+  },
+  bottomCurve: {
+    position: 'absolute',
+    bottom: 0,
+    width: '100%',
+    height: 120,
+    backgroundColor: '#FF7733',
+    borderTopLeftRadius: 100,
+    borderTopRightRadius: 100,
   },
 });
 
-export default Register;
+export default LoginScreen;

@@ -6,13 +6,13 @@ const slides = [
   {
     key: 1,
     text: 'Explore o mundo, saboreie \n o destino!',
-    image: require('./imagem/logo.png'),
-    backgroundColor: 'transparent',
+    image: require('./imagens/logo.png'),
+    backgroundColor: '#FFFFFF',
   },
   {
     key: 2,
     text: 'Encontre o restaurante mais \n próximo de você!',
-    image: require('./imagem/localizar.png'),
+    image: require('./imagens/localizar.png'),
     backgroundColor: '#FA662A',
   }
 ];
@@ -44,9 +44,7 @@ export default function App({ navigation }) {
 
   if (showHome) {
     return (
-  
-          <Text style={styles.buttonText}>Entrar</Text>
-  
+      <Text style={styles.buttonText}>Entrar</Text>
     );
   } else {
     return (
@@ -71,33 +69,36 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    paddingHorizontal: 20, // Adiciona algum espaço horizontal
-    marginBottom:0,
+    paddingHorizontal: 20,
+    width: '100%',  // Ajusta a largura para ocupar toda a tela
+    height: '100%',
   },
   imageContainer: {
-    flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
     width: '100%',
-    marginBottom: 20, // Adiciona espaço abaixo da imagem
+    marginBottom: 20,
+    
   },
   image: {
     resizeMode: 'contain',
-    height: 500,  // Define a altura fixa para a imagem
-    width: '50%',   // Ajusta a largura da imagem para 80% da tela
+    height: 500,
+    width: '50%',
+    
   },
   text: {
     fontSize: 20,
     textAlign: 'center',
     marginHorizontal: 20,
-    marginBottom: 20, // Ajusta a margem inferior do texto
+    marginBottom: 20,
   },
   button: {
-    backgroundColor: 'transparent',
+    backgroundColor: '#FA662A',  // Cor de fundo igual ao slide laranja
     paddingVertical: 15,
     paddingHorizontal: 40,
     borderRadius: 5,
-    marginTop: 80,
+    marginTop: 'auto',  // Posiciona o botão na parte inferior
+    marginBottom: 40,   // Adiciona espaço no final
   },
   buttonText: {
     color: '#fff',
@@ -110,3 +111,4 @@ const styles = StyleSheet.create({
     width: 30,
   },
 });
+

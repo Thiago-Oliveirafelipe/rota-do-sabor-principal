@@ -7,6 +7,7 @@ import Inicio1 from './componentes/inicio1';
 import Home from './componentes/home';        
 import Cadastrar from './componentes/cadastrar';  
 import Redefinir from './componentes/redefinir';  
+import PaginaPrincipal from './componentes/paginaPrincipal';
 
 const TabBottom = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -49,6 +50,16 @@ function MyTabs() {
           headerShown: false,
           tabBarIcon: ({ size, color }) => (
             <Ionicons name='refresh' size={size} color={color} />
+          )
+        }} 
+      />
+      <TabBottom.Screen 
+        name="PaginaPrincipal" 
+        component={PaginaPrincipal}
+        options={{
+          headerShown: false,
+          tabBarIcon: ({ size, color }) => (
+            <Ionicons name='home' size={size} color={color} />
           )
         }} 
       />
