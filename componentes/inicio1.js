@@ -44,7 +44,11 @@ export default function App({ navigation }) {
 
   if (showHome) {
     return (
-      <Text style={styles.buttonText}>Entrar</Text>
+      <Pressable style={style.button}
+      onPress={() => navigation.navigate('Tabs', { screen: 'Home'})}>
+        <Text style={styles.buttonText}>Entrar</Text>
+      </Pressable>
+
     );
   } else {
     return (

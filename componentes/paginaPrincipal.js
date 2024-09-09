@@ -1,7 +1,31 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text, TextInput, StyleSheet, Image, ScrollView, TouchableOpacity } from 'react-native';
+import { getFirestore, collection, onSnapshot } from 'firebase/firestore';
+import { app } from '../config'; // Importar a configuração do Firebase
 
 export default function HomeScreen() {
+  const [restaurantes, setRestaurantes] = useState([]);
+
+  useEffect(() => {
+    const db = getFirestore(app);
+    const restaurantesCollection = collection(db, 'restaurantes');
+
+    const unsubscribe = onSnapshot(restaurantesCollection, querySnapshot => {
+      const restaurantesList = querySnapshot.docs.map(doc => {
+        const data = doc.data();
+        return {
+          // id: doc.id,
+          nome: data.nome || 'N/A',
+          rua: data.rua || 'N/A',
+        };
+      });
+      setRestaurantes(restaurantesList);
+    });
+
+    // Cleanup subscription on unmount
+    return () => unsubscribe();
+  }, []);
+
   const banners = [
     { image: require('./imagens/banner 01.png') },
     { image: require('./imagens/banner 02.png') },
@@ -9,15 +33,9 @@ export default function HomeScreen() {
   ];
 
   const todayItems = [
-    { image: require('./imagens/banner 01.png'), title: 'Apaloosa Churrascaria', location: "Caçapava" },
-    { image: require('./imagens/banner 02.png'), title: 'Boa Prosa Botequim', location: 'Caçapava' },
-    { image: require('./imagens/3.png'), title: 'Chicken Ramen', location: 'Yum Restaurant' },
-  ];
-
-  const restaurants = [
-    { name: 'Ambrosia Hotel & Restaurant', location: 'Taiger Pass, Chittagong', image: require('./imagens/banner 01.png') },
-    { name: 'Tava Restaurant', location: 'Zakir Hossain Rd, Chittagong', image: require('./imagens/banner 02.png') },
-    { name: 'Haatkhola', location: 'Surson Road, Chittagong', image: require('./imagens/3.png') },
+    // Substitua pelos dados reais ou adicione um carregamento similar ao dos restaurantes
+    { image: require('./imagens/Foto ilustrativa.png'), title: 'Food 1', location: 'Location 1' },
+    { image: require('./imagens/Foto ilustrativa.png'), title: 'Food 2', location: 'Location 2' },
   ];
 
   return (
@@ -66,12 +84,12 @@ export default function HomeScreen() {
         </TouchableOpacity>
       </View>
       <Text style={styles.sectionSubtitle}>Check your city Near by Restaurant</Text>
-      {restaurants.map((restaurant, index) => (
-        <View key={index} style={styles.restaurantContainer}>
-          <Image source={restaurant.image} style={styles.restaurantImage} />
+      {restaurantes.map((restaurant) => (
+        <View key={restaurant.id} style={styles.restaurantContainer}>
+          <Image source={require('./imagens/Foto ilustrativa.png')} style={styles.restaurantImage} />
           <View style={styles.restaurantInfo}>
-            <Text style={styles.restaurantTitle}>{restaurant.name}</Text>
-            <Text style={styles.restaurantLocation}>{restaurant.location}</Text>
+            <Text style={styles.restaurantTitle}>{restaurant.nome}</Text>
+            <Text style={styles.restaurantLocation}>{restaurant.rua}</Text>
           </View>
           <TouchableOpacity style={styles.bookButton}>
             <Text style={styles.bookButtonText}>Book</Text>
