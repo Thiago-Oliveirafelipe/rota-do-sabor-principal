@@ -1,22 +1,29 @@
 import { useState } from 'react';
 import { Text, StyleSheet, SafeAreaView, View, TextInput, TouchableOpacity, Image } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 import logoImage from './imagens/logo.png';
-import firebaseApp from '../config';
+import firebaseConfig from '../config';
 
 const LoginScreen = ({ navigation }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
+  // Mova a inicialização do Firebase para o arquivo de configuração
+  // Não inicialize o Firebase aqui dentro da função tentarLogar
+
   const tentarLogar = () => {
-    const auth = getAuth(firebaseApp);
+    const auth = getAuth(firebaseConfig); // Use a instância do Firebase configurada
+
     signInWithEmailAndPassword(auth, email, password)
       .then(() => {
-        navigation.navigate('Home');
+        navigation.navigate('Home'); // Navega para a tela "Home" após login bem-sucedido
       })
       .catch(error => {
         console.error('Login failed:', error);
       });
+    setEmail('');
+    setPassword('');
   };
 
   return (
@@ -52,7 +59,7 @@ const LoginScreen = ({ navigation }) => {
           <Text style={styles.forgotPasswordText}>Esqueceu a senha?</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.button}
-        onPress={() => navigation.navigate('PaginaPrincipal')}>
+        onPress={() => tentarLogar()}>
 
           <Text style={styles.buttonText}>Entrar</Text>
 

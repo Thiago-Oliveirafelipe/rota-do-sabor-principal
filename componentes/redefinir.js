@@ -16,7 +16,8 @@ const LoginScreen = () => {
       <View style={styles.inputContainer}>
         <View style={styles.inputWrapper}>
           <Icon name="email" size={20} color="#000" />
-          <TextInput style={styles.input} placeholder="Email" />
+      -+
+         <TextInput style={styles.input} placeholder="Email" />
         </View>
         <View style={styles.inputWrapper}>
           <Icon name="lock" size={20} color="#000" />

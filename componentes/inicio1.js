@@ -14,6 +14,7 @@ const slides = [
     text: 'Encontre o restaurante mais \n próximo de você!',
     image: require('./imagens/localizar.png'),
     backgroundColor: '#FA662A',
+  
   }
 ];
 
@@ -44,7 +45,7 @@ export default function App({ navigation }) {
 
   if (showHome) {
     return (
-      <Pressable style={style.button}
+      <Pressable style={styles.button}
       onPress={() => navigation.navigate('Tabs', { screen: 'Home'})}>
         <Text style={styles.buttonText}>Entrar</Text>
       </Pressable>
