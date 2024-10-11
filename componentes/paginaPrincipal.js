@@ -1,22 +1,25 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, TextInput, StyleSheet, Image, ScrollView, TouchableOpacity } from 'react-native';
 import { getFirestore, collection, onSnapshot } from 'firebase/firestore';
+import { useNavigation } from '@react-navigation/native'; // Importar o hook useNavigation
 import { app } from '../config'; // Importar a configuração do Firebase
 
 export default function HomeScreen() {
   const [restaurantes, setRestaurantes] = useState([]);
+  const navigation = useNavigation(); // Usar o hook useNavigation
 
   useEffect(() => {
     const db = getFirestore(app);
     const restaurantesCollection = collection(db, 'restaurantes');
-
+    
     const unsubscribe = onSnapshot(restaurantesCollection, querySnapshot => {
       const restaurantesList = querySnapshot.docs.map(doc => {
         const data = doc.data();
         return {
-          // id: doc.id,
+          id: doc.id,  // Adicionar o id do documento como chave única
           nome: data.nome || 'N/A',
           rua: data.rua || 'N/A',
+          imagem: data.imagem || '', // Certifique-se de que a imagem esteja presente
         };
       });
       setRestaurantes(restaurantesList);
@@ -33,12 +36,11 @@ export default function HomeScreen() {
   ];
 
   const todayItems = [
-    // Substitua pelos dados reais ou adicione um carregamento similar ao dos restaurantes
     { image: require('./imagens/Foto ilustrativa.png'), title: 'Food 1', location: 'Location 1' },
     { image: require('./imagens/Foto ilustrativa.png'), title: 'Food 2', location: 'Location 2' },
   ];
 
-  return (
+  return (  
     <ScrollView style={styles.container}>
       {/* Header */}
       <View style={styles.header}>
@@ -86,12 +88,15 @@ export default function HomeScreen() {
       <Text style={styles.sectionSubtitle}>Check your city Near by Restaurant</Text>
       {restaurantes.map((restaurant) => (
         <View key={restaurant.id} style={styles.restaurantContainer}>
-          <Image source={require('./imagens/Foto ilustrativa.png')} style={styles.restaurantImage} />
+          <Image source={{ uri: restaurant.imagem }} style={styles.restaurantImage} />
           <View style={styles.restaurantInfo}>
             <Text style={styles.restaurantTitle}>{restaurant.nome}</Text>
             <Text style={styles.restaurantLocation}>{restaurant.rua}</Text>
           </View>
-          <TouchableOpacity style={styles.bookButton}>
+          <TouchableOpacity
+            style={styles.bookButton}
+            onPress={() => navigation.navigate('detalhes', { restaurant })} // Passa os dados do restaurante para a tela de detalhes
+          >
             <Text style={styles.bookButtonText}>Book</Text>
           </TouchableOpacity>
         </View>
