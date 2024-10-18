@@ -9,6 +9,7 @@ import Cadastrar from './componentes/cadastrar';
 import Redefinir from './componentes/redefinir';  
 import PaginaPrincipal from './componentes/paginaPrincipal';
 import detalhesRestaurantes from './componentes/detalhes'
+import menu from './componentes/menus';
 
 const TabBottom = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -74,7 +75,17 @@ function MyTabs() {
             <Ionicons name='person-add' size={size} color={color} />
           )
         }} 
-      />
+      /><TabBottom.Screen 
+      name="menus" 
+      component={menu}
+      options={{
+        tabBarLabel: "menus",
+        headerShown: false,
+        tabBarIcon: ({ size, color }) => (
+          <Ionicons name='person-add' size={size} color={color} />
+        )
+      }} 
+    />
     </TabBottom.Navigator>
   );
 }

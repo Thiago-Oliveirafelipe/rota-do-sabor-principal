@@ -11,7 +11,7 @@ export default function HomeScreen() {
   useEffect(() => {
     const db = getFirestore(app);
     const restaurantesCollection = collection(db, 'restaurantes');
-    
+
     const unsubscribe = onSnapshot(restaurantesCollection, querySnapshot => {
       const restaurantesList = querySnapshot.docs.map(doc => {
         const data = doc.data();
@@ -40,7 +40,7 @@ export default function HomeScreen() {
     { image: require('./imagens/Foto ilustrativa.png'), title: 'Food 2', location: 'Location 2' },
   ];
 
-  return (  
+  return (
     <ScrollView style={styles.container}>
       {/* Header */}
       <View style={styles.header}>
@@ -95,7 +95,7 @@ export default function HomeScreen() {
           </View>
           <TouchableOpacity
             style={styles.bookButton}
-            onPress={() => navigation.navigate('detalhes', { restaurant })} // Passa os dados do restaurante para a tela de detalhes
+            onPress={() => navigation.navigate('detalhes', { selectedData: restaurant.id })} // Passa o ID do restaurante
           >
             <Text style={styles.bookButtonText}>Book</Text>
           </TouchableOpacity>
