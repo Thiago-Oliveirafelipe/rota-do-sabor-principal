@@ -88,14 +88,18 @@ export default function HomeScreen() {
       <Text style={styles.sectionSubtitle}>Check your city Near by Restaurant</Text>
       {restaurantes.map((restaurant) => (
         <View key={restaurant.id} style={styles.restaurantContainer}>
-          <Image source={{ uri: restaurant.imagem }} style={styles.restaurantImage} />
+          <Image
+            source={{ uri: restaurant.imagem || 'URL_DA_IMAGEM_PADRAO' }}
+            style={styles.restaurantImage}
+          />
           <View style={styles.restaurantInfo}>
             <Text style={styles.restaurantTitle}>{restaurant.nome}</Text>
             <Text style={styles.restaurantLocation}>{restaurant.rua}</Text>
           </View>
           <TouchableOpacity
             style={styles.bookButton}
-            onPress={() => navigation.navigate('detalhes', { selectedData: restaurant.id })} // Passa o ID do restaurante
+            onPress={() => navigation.navigate('detalhes', { selectedData: restaurant.id })}
+            activeOpacity={0.7} // Torna o botão mais opaco ao toque
           >
             <Text style={styles.bookButtonText}>Book</Text>
           </TouchableOpacity>
