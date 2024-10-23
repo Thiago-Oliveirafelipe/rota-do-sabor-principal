@@ -14,6 +14,7 @@ const slides = [
     text: 'Encontre o restaurante mais \n próximo de você!',
     image: require('./imagens/localizar.png'),
     backgroundColor: '#FA662A',
+  
   }
 ];
 
@@ -44,12 +45,21 @@ export default function App({ navigation }) {
 
   if (showHome) {
     return (
+<<<<<<< HEAD
       <Pressable
         style={styles.button}
         onPress={() => navigation.navigate('home')}
       >
 </Pressable>
         );
+=======
+      <Pressable style={styles.button}
+      onPress={() => navigation.navigate('Tabs', { screen: 'Home'})}>
+        <Text style={styles.buttonText}>Entrar</Text>
+      </Pressable>
+
+    );
+>>>>>>> 9c1837d5d9c291a873f4a0a07d59d9b129168321
   } else {
     return (
         <SafeAreaView style={styles.container}>

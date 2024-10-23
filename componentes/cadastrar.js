@@ -34,7 +34,7 @@ const CadastroScreen = ({ navigation }) => {
       });
 
       Alert.alert("Sucesso", "Usuário cadastrado com sucesso!");
-      navigation.navigate('home'); // Navega para a página inicial após cadastro
+      navigation.navigate('Home'); // Navega para a página inicial após cadastro
     } catch (error) {
       console.error("Erro ao adicionar usuário", error);
       Alert.alert("Erro", "Ocorreu um erro ao cadastrar o usuário.");
@@ -42,7 +42,7 @@ const CadastroScreen = ({ navigation }) => {
   };
 
   const handleLoginPress = () => {
-    navigation.navigate('Home'); // Navega para a tela de login
+    navigation.navigate('Login'); // Corrigido para navegar para a tela de login
   };
 
   return (
@@ -74,8 +74,8 @@ const CadastroScreen = ({ navigation }) => {
         <TouchableOpacity style={styles.button} onPress={AdicionarClientes}>
           <Text style={styles.buttonText}>Cadastre-se</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.buttoncad} onPress={handleLoginPress}>
-          <Text style={styles.buttonText}>Já tem conta? Faça Login!</Text>
+        <TouchableOpacity onPress={handleLoginPress}>
+          <Text style={styles.loginLink}>Já tem conta? Faça Login!</Text>
         </TouchableOpacity>
       </View>
     </SafeAreaView>
@@ -88,9 +88,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#FAFAFA',
-  },
-  buttoncad:{
-    color: '#808080',
   },
   logoContainer: {
     marginBottom: 20,
@@ -122,6 +119,12 @@ const styles = StyleSheet.create({
     color: '#FFF',
     fontSize: 18,
     fontWeight: 'bold',
+  },
+  loginLink: {
+    color: '#808080',
+    fontSize: 16,
+    textAlign: 'center',
+    marginTop: 10,
   },
 });
 
