@@ -4,9 +4,10 @@ import { getFirestore, collection, onSnapshot } from 'firebase/firestore';
 import { useNavigation } from '@react-navigation/native'; // Importar o hook useNavigation
 import { app } from '../config'; // Importar a configuração do Firebase
 
-export default function HomeScreen() {
+export default function HomeScreen( {route}) {
   const [restaurantes, setRestaurantes] = useState([]);
-  const navigation = useNavigation(); // Usar o hook useNavigation
+  const navigation = useNavigation();
+  const { email } = route.params; // Usar o hook useNavigation
 
   useEffect(() => {
     const db = getFirestore(app);
@@ -47,6 +48,7 @@ export default function HomeScreen() {
         <Text style={styles.locationText}>Agrabadh 435, Chittagong</Text>
         <Image source={require('./imagens/6326055.png')} style={styles.profileImage} />
       </View>
+      
 
       {/* Search Bar */}
       <View style={styles.searchBar}>

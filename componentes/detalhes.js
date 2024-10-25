@@ -141,9 +141,10 @@ export default function SecondScreen({ route, navigation }) {
             <TouchableOpacity onPress={escolherImagem} style={styles.uploadButton}>
               <Text style={styles.uploadButtonText}>Quer deixar sua recordação desse lugar? Escolha uma imagem</Text>
             </TouchableOpacity>
-
+            <View style={styles.horizontalLine} />
 
             <Text style={styles.infodesc}>{item.descricao}</Text>
+            <View style={styles.horizontalLine} />
             <Text style={styles.endereco}>Endereço</Text>
             <View style={styles.infoRow}>
               <TouchableOpacity onPress={() => openMaps(item.rua)} style={styles.mapButton}>
@@ -155,12 +156,15 @@ export default function SecondScreen({ route, navigation }) {
 
             </View>
             <Text style={styles.inforowText}>{item.rua}</Text>
+            <View style={styles.horizontalLine} />
             <Text style={styles.endereco}>Telefone</Text>
             <Text style={styles.textex}>Entre em contato e tenha uma experiencia gastronomica</Text>
 
             <Text style={styles.infoTextTel}>{item.telefone}</Text>
+            <View style={styles.horizontalLine} />
             <Text style={styles.endereco}>Horário</Text>
             <Text style={styles.infoTextho}>{item.horario}</Text>
+            <View style={styles.horizontalLine} />
             <TouchableOpacity
               style={styles.bookButton}
               onPress={() => navigation.navigate('menus', { selectedData: selectedData })} // Navega para a tela de menu
@@ -189,6 +193,12 @@ const styles = StyleSheet.create({
     fontSize: 15,
     justifyContent: 'center',
     textAlign: 'center',
+  }, 
+  horizontalLine: {
+    width: '100%',  // Largura total da linha
+    height: 1,      // Espessura da linha
+    backgroundColor: 'gray',  // Cor da linha
+    marginVertical: 20, // Espaçamento vertical
   },
   textex: {
     textAlign: ' center',

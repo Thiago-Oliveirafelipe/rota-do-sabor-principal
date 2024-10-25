@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { StyleSheet, View, Text, Image, SafeAreaView, StatusBar, Pressable } from 'react-native';
 import AppIntroSlider from 'react-native-app-intro-slider';
 
@@ -17,8 +17,7 @@ const slides = [
   }
 ];
 
-export default function App({ navigation }) {
-  const [showHome, setShowHome] = useState(false);
+export default function AppIntro({ navigation, fontSizetack }) {
 
   function renderSlides({ item }) {
     return (
@@ -30,7 +29,7 @@ export default function App({ navigation }) {
         {item.key === 2 && (
           <Pressable
             style={styles.button}
-            onPress={() => navigation.navigate('Tabs', { screen: 'Home' })}
+            onPress={() => navigation.navigate('Home')}
           >
             <Text style={styles.buttonText}>Entrar</Text>
           </Pressable>
@@ -39,28 +38,17 @@ export default function App({ navigation }) {
     );
   }
 
-  if (showHome) {
-    return (
-      <Pressable
-        style={styles.button}
-        onPress={() => navigation.navigate('Tabs', { screen: 'Home' })}
-      >
-        <Text style={styles.buttonText}>Entrar</Text>
-      </Pressable>
-    );
-  } else {
-    return (
-      <SafeAreaView style={styles.container}>
-        <StatusBar barStyle="dark-content" />
-        <AppIntroSlider
-          renderItem={renderSlides}
-          data={slides}
-          activeDotStyle={styles.activeDot}
-          onDone={() => setShowHome(true)}
-        />
-      </SafeAreaView>
-    );
-  }
+  return (
+    <SafeAreaView style={styles.container}>
+      <StatusBar barStyle="dark-content" />
+      <AppIntroSlider
+        renderItem={renderSlides}
+        data={slides}
+        activeDotStyle={styles.activeDot}
+        showDoneButton={false}
+      />
+    </SafeAreaView>
+  );
 }
 
 const styles = StyleSheet.create({
